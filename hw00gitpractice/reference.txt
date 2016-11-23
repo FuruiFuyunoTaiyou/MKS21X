@@ -1,0 +1,7 @@
+List of git cmds I have learned so far
+- clone
+  - For downloading the ... (to be continued)
+- pull
+- push
+- add
+- commit
