@@ -1,7 +1,15 @@
 List of git cmds I have learned so far
 - clone
-  - For downloading the ... (to be continued)
+  - For downloading a repo to a new device (one that did not previously have that repo)
 - pull
+  - For downloading as a way of updating the device (used subsequently after clone)
 - push
+  - For uploading the repo (updating) to the github website
 - add
+  - For marking/tracking which files to commit
 - commit
+  - For saving a file locally and making the changes permanent
+  - When committing, use: -m "insert description here" to add a description
+- config
+  - For setting up the local git program
+  - Use --global <key> to assign a value to that key and --list [<key>] to check the assigned values.
