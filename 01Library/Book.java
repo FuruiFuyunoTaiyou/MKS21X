@@ -27,18 +27,21 @@ public  class Book{
     public boolean setAuthor(String Author){
 	boolean successful = false;
 	author = Author;
+	successful = true;
 	return successful;
     }
 
      public boolean setTitle(String Title){
 	boolean successful = false;
 	title = Title;
+	successful = true;
 	return successful;
     }
 
     public boolean setISBN(String ISBNum){
 	boolean successful = false;
 	ISBN = ISBNum;
+	successful = true;
 	return successful;
     }
 
