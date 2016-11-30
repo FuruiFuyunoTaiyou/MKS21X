@@ -1,7 +1,7 @@
-public abstract class Book{
-    String author;
-    String title;
-    String ISBN;
+public  class Book{
+    private String author;
+    private String title;
+    private String ISBN;
 
     public Book(){
     }
@@ -34,5 +34,15 @@ public abstract class Book{
 	boolean successful = false;
 	title = Title;
 	return successful;
+    }
+
+    public boolean setISBN(String ISBNum){
+	boolean successful = false;
+	ISBN = ISBNum;
+	return successful;
+    }
+
+    public String toString(){
+	return title + ", " + author + ", " + ISBN;
     }
 }
