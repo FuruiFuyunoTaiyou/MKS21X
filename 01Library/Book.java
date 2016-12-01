@@ -46,6 +46,13 @@ public  class Book{
     }
 
     public String toString(){
-	return title + ", " + author + ", " + ISBN;
+	return getTitle() + ", " + getAuthor() + ", " + getISBN();
+    }
+
+    public static void main(String[]args){
+	Book b0 = new Book("person", "random title", "210587689");
+	b0.setTitle("new title");
+	System.out.println(b0);
+	
     }
 }
