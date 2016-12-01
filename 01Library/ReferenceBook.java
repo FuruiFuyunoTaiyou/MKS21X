@@ -1,0 +1,3 @@
+class ReferenceBook extends LibraryBook{
+
+}
