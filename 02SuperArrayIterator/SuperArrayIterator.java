@@ -10,7 +10,7 @@ public class SuperArrayIterator implements Iterator<String>{
     }
 
     public boolean hasNext(){
-	return currentIndex < superArrayName.size() - 1; 
+	return currentIndex < superArray.size() - 1; 
     }
 
     public String next(){
