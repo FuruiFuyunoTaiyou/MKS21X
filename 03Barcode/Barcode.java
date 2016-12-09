@@ -1,6 +1,5 @@
 public class Barcode implements Comparable<Barcode>{
     private String _zip;
-    //private int _checkDigit;
 
     private boolean digitsOnly(String zip){
 	for(int i = 0; i < 5; i++){
@@ -14,26 +13,24 @@ public class Barcode implements Comparable<Barcode>{
 	return true;
     }
 
-    /*private boolean barsOnly(String barcode){
+    private static boolean barsOnly(String barcode){
 	for(int i = 0; i < 32; i++){
 	    if(barcode.charAt(i) != '|' && barcode.charAt(i) != ':'){
 		return false;
 	    }
 	}
 	return true;
-	}*/
+    }
 
-    private int checkSum(){
+    private static int checkSum(String zip){
 	int sum = 0;
 	for(int i = 0; i < 5; i++){
-	    //sum += Integer.parseInt(_zip.charAt(i));
-	    sum += Character.getNumericValue(_zip.charAt(i));
+	    sum += Character.getNumericValue(zip.charAt(i));
 	}
 	return sum % 10;
     }
 
-    public static String toCode(String zip){
-	//Using an array discussed in class
+    private static String[] accessCode(){
 	String[] code = {
 	    "||:::",
 	    ":::||", 
@@ -46,18 +43,16 @@ public class Barcode implements Comparable<Barcode>{
 	    "|::|:",
 	    "|:|::"
 	};
+	return code;
+    }
+
+    public static String toCode(String zip){
+	String[] code = accessCode();
 	String barcode = "|";
 	for(int i = 0; i < zip.length(); i++){
 	    barcode += code[Character.getNumericValue(zip.charAt(i))];
 	}
-	//do not know how to reference checkSum() in a static method
-	int sum = 0;
-	for(int i = 0; i < 5; i++){
-	    //sum += Integer.parseInt(_zip.charAt(i));
-	    sum += Character.getNumericValue(zip.charAt(i));
-	}
-        sum %= 10;
-	barcode += code[sum] + "|";
+	barcode += code[checkSum(zip)] + "|";
 	return barcode;
     }
 
@@ -69,24 +64,12 @@ public class Barcode implements Comparable<Barcode>{
 	}else if(barcode.charAt(31) != '|'){
 	    throw new IllegalArgumentException("barcode does not end  with |");
 	}
-	for(int i = 0; i < 32; i++){
-	    if(barcode.charAt(i) != '|' && barcode.charAt(i) != ':'){
-		throw new IllegalArgumentException("barcode must only contain bars (i.e. | or :)");
-	    }
+	if(!barsOnly(barcode)){
+	    throw new IllegalArgumentException("barcode must only contain bars (i.e. | or :)");
 	}
+    
 	String zipAndCheck = "";
-	String[] code = {
-	    "||:::",
-	    ":::||", 
-	    "::|:|",
-	    "::||:",
-	    ":|::|",
-	    ":|:|:",
-	    ":||::",
-	    "|:::|",
-	    "|::|:",
-	    "|:|::"
-	};
+	String[] code = accessCode();
 	//find zipAndCheck
 	boolean found = false;
 	for(int i = 1; i < 30; i += 5){
@@ -105,12 +88,7 @@ public class Barcode implements Comparable<Barcode>{
 	    }
 	}
 	//verify validity of check sum
-	int sum = 0;
-	for(int i = 0; i < 5; i++){
-	    sum += Character.getNumericValue(zipAndCheck.charAt(i));
-	}
-        sum %= 10;
-	if(sum != Character.getNumericValue(zipAndCheck.charAt(5))){
+	if(checkSum(zipAndCheck) != Character.getNumericValue(zipAndCheck.charAt(5))){
 	    throw new IllegalArgumentException("barcode contains invalid check sum or invalid zip");
 	}
 	return zipAndCheck.substring(0, 5);
@@ -135,7 +113,7 @@ public class Barcode implements Comparable<Barcode>{
     }
 
     public String toString(){
-	return _zip + checkSum() + " " + toCode(_zip);
+	return _zip + checkSum(_zip) + " " + toCode(_zip);
     }
 
     public int compareTo(Barcode other){
