@@ -25,6 +25,24 @@ public class Sorts{
 	}
     }
 
+    public static void insertionSort(int[] data){
+	//compare the first element after the sorted subarray to each element from greatest to least
+	//if the value to be placed is less than the value it is being compared with, switch places
+	//if otherwise, you're done with placing that value; start over
+	int lostValue = 0;
+	for(int i = 1; i < data.length; i++){//for each value besides first one,
+	    lostValue = data[i];
+	    for(int index = i - 1; index >= 0; index--){//looking from greatest to least
+		if(lostValue < data[index]){
+		    data[index + 1] = data[index];
+		    data[index] = lostValue;
+		}else{
+		    data[index + 1] = lostValue;
+		}
+	    }
+	}
+    }
+
     public static void printArray(int[] data){
 	String arrayValues = "[" + data[0];
 	for(int i = 1; i < data.length; i++){
@@ -40,13 +58,13 @@ public class Sorts{
 	int[] data1 = {2, 0, 13, 0, 4, 1};
 	int[] data2 = {0};
 	int[] data3 = {};
-	selectionSort(data0);
+        insertionSort(data0);
 	printArray(data0);
-	selectionSort(data1);
+	insertionSort(data1);
 	printArray(data1);
-	selectionSort(data2);
+	insertionSort(data2);
 	printArray(data2);
-	selectionSort(data3);
+	insertionSort(data3);
 	printArray(data3);
     }
 }
