@@ -13,12 +13,11 @@ public class Sorts{
 	//find the index of smallest number remaining
 	//swap places with the element in the place it's supposed to be in
 	//repeat
-	int currentSmallest = 0;//set it to the first one
 	int indexOfCurrentSmallest = 0;
 	for (int i = 0; i < data.length - 1; i++){ //for each element in data except the last one,
 	    indexOfCurrentSmallest = i; //first set the  indexOfCurrentSmallest
 	    for (int index = i + 1; index < data.length; index++){ //run through the rest of the array to find the actual indexOfCurrentSmallest
-		if(data[index] < currentSmallest){
+		if(data[index] < data[indexOfCurrentSmallest]){
 		    indexOfCurrentSmallest = index;
 		}
 	    }
@@ -39,12 +38,15 @@ public class Sorts{
     public static void main(String[] args){
 	int[] data0 = {64, 25, 12, 22, 11};
 	int[] data1 = {2, 0, 13, 0, 4, 1};
-	int[] data2 = {};
+	int[] data2 = {0};
+	int[] data3 = {};
 	selectionSort(data0);
 	printArray(data0);
 	selectionSort(data1);
 	printArray(data1);
 	selectionSort(data2);
 	printArray(data2);
+	selectionSort(data3);
+	printArray(data3);
     }
 }
