@@ -10,36 +10,45 @@ public class Sorts{
     }
     
     public static void selectionSort(int[] data){
+	//check for empty lists
 	//find the index of smallest number remaining
 	//swap places with the element in the place it's supposed to be in
 	//repeat
-	int indexOfCurrentSmallest = 0;
-	for (int i = 0; i < data.length - 1; i++){ //for each element in data except the last one,
-	    indexOfCurrentSmallest = i; //first set the  indexOfCurrentSmallest
-	    for (int index = i + 1; index < data.length; index++){ //run through the rest of the array to find the actual indexOfCurrentSmallest
-		if(data[index] < data[indexOfCurrentSmallest]){
-		    indexOfCurrentSmallest = index;
+
+	//if statement idea from 
+	if(data.length >= 0){
+	    int indexOfCurrentSmallest = 0;
+	    for (int i = 0; i < data.length - 1; i++){ //for each element in data except the last one,
+		indexOfCurrentSmallest = i; //first set the  indexOfCurrentSmallest
+		for (int index = i + 1; index < data.length; index++){ //run through the rest of the array to find the actual indexOfCurrentSmallest
+		    if(data[index] < data[indexOfCurrentSmallest]){
+			indexOfCurrentSmallest = index;
+		    }
 		}
+		swap(data, i, indexOfCurrentSmallest);	
 	    }
-	    swap(data, i, indexOfCurrentSmallest);
 	}
     }
 
     public static void insertionSort(int[] data){
+	//check for empty lists
 	//compare the first element after the sorted subarray to each element from greatest to least
 	//if the value to be placed is less than the value it is being compared with, switch places
 	//if otherwise, you're done with placing that value; start over
+
 	int lostValue = 0;
 	for(int i = 1; i < data.length; i++){//for each value besides first one,
 	    lostValue = data[i];
-	    for(int index = i - 1; index >= 0; index--){//looking from greatest to least
-		if(lostValue < data[index]){
-		    data[index + 1] = data[index];
-		    data[index] = lostValue;
-		}else{
-		    data[index + 1] = lostValue;
-		}
+	    //System.out.println(lostValue);
+	    //System.out.println(i);
+	    int index = i - 1;
+	    //System.out.println(index);
+	    while(index >= 0 && lostValue < data[index]){
+		data[index + 1] = data[index];
+		data[index] = lostValue;
+		index--;
 	    }
+	    data[index + 1] = lostValue;
 	}
     }
 
@@ -64,7 +73,7 @@ public class Sorts{
 	printArray(data1);
 	insertionSort(data2);
 	printArray(data2);
-	insertionSort(data3);
+	selectionSort(data3);
 	printArray(data3);
     }
 }
