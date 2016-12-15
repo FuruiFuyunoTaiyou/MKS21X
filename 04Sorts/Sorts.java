@@ -32,14 +32,16 @@ public class Sorts{
 	int lostValue = 0;
 	for(int i = 1; i < data.length; i++){//for each value besides first one,
 	    lostValue = data[i];
-	    for(int index = i - 1; index >= 0; index--){//looking from greatest to least
-		if(lostValue < data[index]){
-		    data[index + 1] = data[index];
-		    data[index] = lostValue;
-		}else{
-		    data[index + 1] = lostValue;
-		}
+	    //System.out.println(lostValue);
+	    //System.out.println(i);
+	    int index = i - 1;
+	    //System.out.println(index);
+	    while(index >= 0 && lostValue < data[index]){
+		data[index + 1] = data[index];
+		data[index] = lostValue;
+		index--;
 	    }
+	    data[index + 1] = lostValue;
 	}
     }
 
