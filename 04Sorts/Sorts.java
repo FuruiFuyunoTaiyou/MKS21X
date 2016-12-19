@@ -1,4 +1,8 @@
 //the idea of using an if statement to account for empty arrays was form Jacqueline Xu
+
+import java.util.*; //for the random
+
+
 public class Sorts{
     public static String name(){
 	return "10.Chen.Winnie";
@@ -88,9 +92,25 @@ public class Sorts{
 	System.out.println(arrayValues);
     }
 
+    public static long testSort(int[] origin, String whichSort){
+	long startTime, endTime;
+	startTime = System.currentTimeMillis();
+	if(whichSort.equals("selectionSort")){
+	    selectionSort(origin);
+	}else if(whichSort.equals("insertionSort")){
+	    insertionSort(origin);
+	}else if(whichSort.equals("bubbleSort")){
+	    bubbleSort(origin);
+	}
+	endTime = System.currentTimeMillis();
+	System.out.println(startTime);
+	System.out.println(endTime);
+	//insert code for checking if the code returned the expected array
+	return endTime - startTime;
+    }
 
     public static void main(String[] args){
-	int[] data0 = {64, 25, 12, 22, 11};
+        /*int[] data0 = {64, 25, 12, 22, 11};
 	int[] data1 = {2, 0, 13, 0, 4, 1};
 	int[] data2 = {0};
 	int[] data3 = {};
@@ -102,5 +122,50 @@ public class Sorts{
 	printArray(data2);
         bubbleSort(data3);
 	printArray(data3);
+        */
+	/*System.out.println(args);
+	System.out.println(args[0]);
+	System.out.println(args[1]);
+	System.out.println(args[2]);*/
+	if(args.length < 3){
+	    System.out.println("Enter additional info: size of array, name of sort method, and the order of the array (-1 for descending, 1 for ascending, and 0 for random (I'll assume the type of input is right for now)");
+	}else{
+	    
+	    int[] data = new int[Integer.parseInt(args[0])];
+	    Random randgen = new Random();
+	    //int number = randgen.nextInt();
+	    if(Integer.parseInt(args[2]) == -1){
+		//data[0] = number;
+		for(int i = 0; i < data.length; i++){
+		    /*number = randgen.nextInt();
+		    while(number > data[i - 1]){
+			number = randgen.nextInt(20000); //* (int)Math.round(Math.pow(-1, randgen.nextInt(1)));
+		    }
+		    data[i] = number;*/
+		    data[i] = 0 - i;
+		}
+	    }else if(args[2].equals("1")){
+		//data[0] = number;
+		for(int i = 1; i < data.length; i++){
+		    /*number = randgen.nextInt();
+		    while(number < data[i - 1]){
+			number = randgen.nextInt(20000) * (int)Math.round(Math.pow(-1, randgen.nextInt(1)));
+		    }
+		    data[i] = number;*/
+		    data[i] = i;
+		}
+	    }else{
+		for(int i = 0; i < data.length; i++){
+		    data[i] = randgen.nextInt(); //this runs fine, but the code above doesn't terminate
+		}
+	    }
+	    System.out.println(testSort(data, args[1]));
+
+	    
+	    printArray(data);
+
+	    
+	}
+	
     }
 }
