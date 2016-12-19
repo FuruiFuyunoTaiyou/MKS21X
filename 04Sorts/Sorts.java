@@ -103,10 +103,18 @@ public class Sorts{
 	    bubbleSort(origin);
 	}
 	endTime = System.currentTimeMillis();
-	System.out.println(startTime);
-	System.out.println(endTime);
-	//insert code for checking if the code returned the expected array
-	return endTime - startTime;
+	//System.out.println(startTime);
+	//System.out.println(endTime);
+	boolean asExpected = true;
+	for(int i = 1; i < origin.length; i++){
+	    if(origin[i] < origin[i - 1]){
+		asExpected = false;
+	    }
+	}
+	if(asExpected){
+	    return (endTime - startTime);
+	}
+	return 10000;
     }
 
     public static void main(String[] args){
@@ -159,10 +167,10 @@ public class Sorts{
 		    data[i] = randgen.nextInt(); //this runs fine, but the code above doesn't terminate
 		}
 	    }
-	    System.out.println(testSort(data, args[1]));
+	    System.out.println(testSort(data, args[1]) + " Millis");
 
 	    
-	    printArray(data);
+	    //printArray(data);
 
 	    
 	}
